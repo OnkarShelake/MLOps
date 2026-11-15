@@ -19,9 +19,14 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                bat 'python -m venv .venv'
-                bat '.venv\\Scripts\\python -m pip install -r requirements.txt'
-            }
+                bat '''
+                    if exist .venv rmdir /s /q .venv
+                    python -m venv .venv
+                    .venv\\Scripts\\python -m pip install --upgrade pip
+                    .venv\\Scripts\\python -m pip install -r requirements.txt
+                    .venv\\Scripts\\python -m pip show pandas evidently
+                '''
+                }
         }
 
         stage('Run Pytest') {

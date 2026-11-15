@@ -1,5 +1,5 @@
 fastapi
 uvicorn
 pytest
-pandas
-evidently
+pandas==2.2.3
+evidently==0.7.23
